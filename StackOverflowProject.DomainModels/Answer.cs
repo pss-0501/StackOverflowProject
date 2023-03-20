@@ -8,25 +8,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StackOverflowProject.DomainModels
 {
-    public class Question
+    public class Answer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int QuestionID { get; set; }
-        public string QuestionName { get; set; }
-        public DateTime QuestionDateAndTime { get; set; }
+        public int AnswerID { get; set; }
+        public string AnswerText { get; set; }
+        public DateTime AnswerDateAndTime { get; set; }
         public int UserID { get; set; }
-        public int CategoryID { get; set; }
+        public int QusetionID { get; set; }
         public int VotesCount { get; set; }
-        public int AnswersCount { get; set; }
-        public int ViewsCount { get; set; }
 
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
 
-        [ForeignKey("UserID")]
-        public virtual Category Category { get; set; }
-
-        public virtual List<Answer> Answers { get; set; }
+        public virtual List<Vote> Votes { get; set; }
     }
 }
