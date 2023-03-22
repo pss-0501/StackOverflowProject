@@ -13,11 +13,11 @@ namespace StackOverflowProject.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
-        public int Email { get; set; }
-        public int PasswordHash { get; set; }
-        public int Name { get; set; }
-        public int Mobile { get; set; }
-        public int IsAdmin { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
+        public string Name { get; set; }
+        public string Mobile { get; set; }
+        public Boolean IsAdmin { get; set; }
 
     }
 }
