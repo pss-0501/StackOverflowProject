@@ -18,9 +18,9 @@ namespace StackOverflowProject.ServiceLayer
         void UpdateQustionVotesCount(int qid, int value);
         void UpdateQuestionAnswersCount(int qid, int value);
         void UpdateQuestionViewsCount(int qid, int value);
-        void Delete(int qid);
-        List<Question> GetQuestions();
-        QuestionViewModel GetQuestionByQuestionID(int QuestionID);
+        void DeleteQuestion(int qid);
+        List<QuestionViewModel> GetQuestions();
+        QuestionViewModel GetQuestionByQuestionID(int QuestionID, int UserID);
     }
     public class QuestionsService : IQuestionsService
     {
@@ -47,38 +47,68 @@ namespace StackOverflowProject.ServiceLayer
             qr.UpdateQustionDetails(q);
         }
 
-        public void UpdateQuestionAnswersCount(int qid, int value)
+        public void UpdateQustionVotesCount(int qid, int value)
         {
-            throw new NotImplementedException();
+            qr.UpdateQustionVotesCount(qid, value);
         }
 
         public void UpdateQuestionViewsCount(int qid, int value)
         {
-            throw new NotImplementedException();
+            qr.UpdateQuestionViewsCount(qid, value);
         }
 
-        
-
-        public void UpdateQustionVotesCount(int qid, int value)
+        public void UpdateQuestionAnswersCount(int qid, int value)
         {
-            throw new NotImplementedException();
+            qr.UpdateQuestionAnswersCount(qid, value);
         }
 
-        public void Delete(int qid)
+        public void DeleteQuestion(int qid)
         {
-            throw new NotImplementedException();
-        }
+            qr.DeleteQuestion(qid);
+        }        
 
-        public QuestionViewModel GetQuestionByQuestionID(int QuestionID)
+        public List<QuestionViewModel> GetQuestions()
         {
-            throw new NotImplementedException();
+            List<Question> q = qr.GetQuestions();
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<Question, QuestionViewModel>();
+                cfg.CreateMap<User, UserViewModel>();
+                cfg.CreateMap<Category, CategoryViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Vote, VoteViewModel>();
+                cfg.IgnoreUnmapped(); });
+
+            IMapper mapper = config.CreateMapper();
+            List<QuestionViewModel> qvm = mapper.Map<List<Question>, List<QuestionViewModel>>(q);
+            return qvm;
         }
 
-        public List<Question> GetQuestions()
+        public QuestionViewModel GetQuestionByQuestionID(int QuestionID, int UserID = 0)
         {
-            throw new NotImplementedException();
-        }
+            Question q = qr.GetQuestionByQuestionID(QuestionID).FirstOrDefault();
+            QuestionViewModel qvm = null;
+            if (q != null)
+            {
+                var config = new MapperConfiguration(cfg => { cfg.CreateMap<Question, QuestionViewModel>();
+                    cfg.CreateMap<User, UserViewModel>();
+                    cfg.CreateMap<Category, CategoryViewModel>();
+                    cfg.CreateMap<Answer, AnswerViewModel>();
+                    cfg.CreateMap<Vote, VoteViewModel>();
+                    cfg.IgnoreUnmapped(); });
 
-        
+                IMapper mapper = config.CreateMapper();
+                qvm = mapper.Map<Question, QuestionViewModel>(q);
+
+                foreach(var item in qvm.Answers)
+                {
+                    item.CurrentUserVoteType = 0;
+                    VoteViewModel vote = item.Votes.Where(temp => temp.UserID == UserID).FirstOrDefault();
+                    if(vote != null)
+                    {
+                        item.CurrentUserVoteType = vote.VoteValue;
+                    }
+                }
+            }
+            return qvm;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace StackOverflowProject.Repositories
         void UpdateQustionVotesCount(int qid, int value);
         void UpdateQuestionAnswersCount(int qid, int value);
         void UpdateQuestionViewsCount(int qid, int value);
-        void Delete(int qid);
+        void DeleteQuestion(int qid);
         List<Question> GetQuestions();
         List<Question> GetQuestionByQuestionID(int QuestionID);
     }
@@ -70,7 +70,7 @@ namespace StackOverflowProject.Repositories
                 db.SaveChanges();
             }
         }
-        public void Delete(int qid)
+        public void DeleteQuestion(int qid)
         {
             Question qt = db.Questions.Where(temp => temp.QuestionID == qid).FirstOrDefault();
             if (qt != null)
