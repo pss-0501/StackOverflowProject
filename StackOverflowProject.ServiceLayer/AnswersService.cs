@@ -77,8 +77,6 @@ namespace StackOverflowProject.ServiceLayer
             IMapper mapper = config.CreateMapper();
             List<AnswerViewModel> avm = mapper.Map<List<Answer>, List<AnswerViewModel>>(a);
             return avm;
-        }
-
-        
+        }        
     }
 }
