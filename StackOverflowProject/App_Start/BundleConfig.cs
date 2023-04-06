@@ -10,8 +10,8 @@ namespace StackOverflowProject
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include("~/Scripts/jquery-3.6.4.js", "~/Scripts/umd/popper.js", "~/Scripts/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/Styles/bootstrap").Include("~/Content/bootstrap.css"));
+            bundles.Add(new ScriptBundle("~/Scripts/jq").Include("~/Scripts/jquery-3.6.4.js", "~/Scripts/umd/popper.js", "~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/Styles/bts").Include("~/Content/bootstrap.css"));
             bundles.Add(new ScriptBundle("~/Styles/site").Include("~/Content/Styles.css"));
             BundleTable.EnableOptimizations = true;
         }
