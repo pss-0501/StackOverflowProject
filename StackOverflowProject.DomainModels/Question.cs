@@ -21,10 +21,8 @@ namespace StackOverflowProject.DomainModels
         public int AnswersCount { get; set; }
         public int ViewsCount { get; set; }
 
-        [ForeignKey("UserID")]
         public virtual User User { get; set; }
 
-        [ForeignKey("UserID")]
         public virtual Category Category { get; set; }
 
         public virtual List<Answer> Answers { get; set; }

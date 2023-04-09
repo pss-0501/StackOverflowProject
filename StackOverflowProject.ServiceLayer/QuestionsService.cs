@@ -70,15 +70,27 @@ namespace StackOverflowProject.ServiceLayer
         public List<QuestionViewModel> GetQuestions()
         {
             List<Question> q = qr.GetQuestions();
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<Question, QuestionViewModel>();
-                cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<Category, CategoryViewModel>();
-                cfg.CreateMap<Answer, AnswerViewModel>();
-                cfg.CreateMap<Vote, VoteViewModel>();
+
+            //Mapper.CreateMap<Question, QuestionViewModel>()
+            //    .ForMember(dest => dest.VirtualProperty, opt => opt.MapFrom(src => src.VirtualProperty))
+            //    .ForMember(dest => dest.ForeignKey, opt => opt.MapFrom(src => src.ForeignKey));
+
+            var config = new MapperConfiguration(cfg => {
+
+                cfg.CreateMap<Question, QuestionViewModel>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.CategoryName));
+
+                //cfg.CreateMap<Question, QuestionViewModel>(); //cfg.IgnoreUnmapped();
+                //cfg.CreateMap<User, UserViewModel>(); cfg.IgnoreUnmapped();
+                //cfg.CreateMap<Category, CategoryViewModel>(); cfg.IgnoreUnmapped();
+                //cfg.CreateMap<Answer, AnswerViewModel>(); cfg.IgnoreUnmapped();
+                //cfg.CreateMap<Vote, VoteViewModel>(); cfg.IgnoreUnmapped();
+
                 cfg.IgnoreUnmapped(); });
 
             IMapper mapper = config.CreateMapper();
-            List<QuestionViewModel> qvm = mapper.Map<List<Question>, List<QuestionViewModel>>(q);
+            var qvm = mapper.Map<List<QuestionViewModel>>(q);  // List<QuestionViewModel> 
             return qvm;
         }
 
@@ -98,15 +110,15 @@ namespace StackOverflowProject.ServiceLayer
                 IMapper mapper = config.CreateMapper();
                 qvm = mapper.Map<Question, QuestionViewModel>(q);
 
-                foreach(var item in qvm.Answers)
-                {
-                    item.CurrentUserVoteType = 0;
-                    VoteViewModel vote = item.Votes.Where(temp => temp.UserID == UserID).FirstOrDefault();
-                    if(vote != null)
-                    {
-                        item.CurrentUserVoteType = vote.VoteValue;
-                    }
-                }
+                //foreach (var item in qvm.Answers)
+                //{
+                //    item.CurrentUserVoteType = 0;
+                //    VoteViewModel vote = item.Votes.Where(temp => temp.UserID == UserID).FirstOrDefault();
+                //    if (vote != null)
+                //    {
+                //        item.CurrentUserVoteType = vote.VoteValue;
+                //    }
+                //}
             }
             return qvm;
         }
