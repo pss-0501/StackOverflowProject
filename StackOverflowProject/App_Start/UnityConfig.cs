@@ -17,6 +17,7 @@ namespace StackOverflowProject
             // it is NOT necessary to register your controllers
             
             container.RegisterType<IQuestionsService, QuestionsService>();
+            container.RegisterType<IUserService, UsersService>();
 
             DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));
 

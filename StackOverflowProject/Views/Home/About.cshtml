@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "About";
+}
+
+<!DOCTYPE html>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="jumbotron">
+            <h1>Learn, Shared, Build!</h1>
+            <h3>Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge and build their careers.</h3>
+            <p>Join the world's largest developer community</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header bg-light">Founded in 2008</div>
+            <div class="card-body">
+                Founded in 2008, Stack Overflow is the largest, most trusted online community for developers to learn, share their knowledge
+                and build careers. More than 50 million professional and aspiring programmers visit Stack Overflow each month to help solve coding problems,
+                develop new skills and find job opportunities.
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header bg-light">Our Partners</div>
+            <div class="card-body">
+                Stack Overflow is written in C# using the ASP.NET MVC (Model–View–Controller) framework, and Microsoft SQL Server for the 
+                database and the Dapper object-relational mapper used for data access. Unregistered users have access to most of the site's functionality, 
+                while users who sign in can gain access to more functionality.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header bg-light">Stack Overflow Offices</div>
+            <img class="card-img-top" src="~/Images/map.jpg" alt="Offices" />
+            <div class="card-body">
+                Stack Overflow has 514 employees. 168 employees at Stack Overflow have reviewed Stack Overflow across various 
+                culture dimensions, providing their opinions on items ranging from executive ratings to the pace at work. The latest review was months ago.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("a[href='/home/about']").attr("id", "active");
+</script>

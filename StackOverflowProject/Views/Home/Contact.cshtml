@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+}
+
+<!DOCTYPE html>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header bg-light">Teams</div>
+            <div class="card-body">
+                <p>Stack Overflow has a dedicated platform for collaborators to come together to solve nebulous problems in an asynchronous, 
+                documented way with multiple perspectives that evolve into a structured format that captures collective insights.</p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header bg-light">Enterprise</div>
+            <div class="card-body">
+                <p>
+                    Enterprise is a very different offering than our Free, Basic, and Business tiers. When you create a team here on 
+                    Stack Overflow on one of those tiers, you're getting a team that is hosted on a shared infrastructure with all other teams. 
+                    It cannot be installed or moved elsewhere.
+                </p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("a[href='/home/contact']").attr("id", "active");
+</script>

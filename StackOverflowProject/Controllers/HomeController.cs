@@ -24,5 +24,15 @@ namespace StackOverflowProject.Controllers
 
             return View(questions);
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+        
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }
