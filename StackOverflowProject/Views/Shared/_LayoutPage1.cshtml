@@ -12,6 +12,7 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/umd/popper.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Styles.css" rel="stylesheet" />
 
@@ -58,17 +59,17 @@
                     @if (Session["CurrentUserName"] != null)
                     {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                                <img src="~/Images/user.png" width="20" />
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" data-target="#drop">
+                                <img src="~/Images/user.png" width="20px"/>
+                                @Session["CurrentUserName"]
                             </a>
-                            <div class="dropdown-menu bg-info">
+                            <div class="dropdown-menu bg-info" id="drop">
                                 <a class="dropdown-item" href="/account/logout">Logout</a>
                                 <a class="dropdown-item" href="/account/changeprofile">Change Profile</a>
                                 <a class="dropdown-item" href="/account/changepassword">Change Password</a>
                             </div>
                         </li>
-                    }
-
+                        }
                 </ul>
             </div>
             <form class="form-check-inline" action="/home/search">

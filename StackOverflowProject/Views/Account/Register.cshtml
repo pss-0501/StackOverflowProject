@@ -13,7 +13,7 @@
             <div class="form-row">
                 <div class="form-group col-sm-12">
                     <label for="txtName">Name</label>
-                    <input type="text" class="form-control" id="txtName" placeholder="Enter Name" name="Name" required pattern="^[a-zA-Z]*$" autofocus />
+                    <input type="text" class="form-control" id="txtName" placeholder="Enter Name" name="Name" required pattern="^[a-zA-Z ]*$" autofocus />
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -26,13 +26,14 @@
             <div class="form-row">
                 <div class="form-group col-sm-6">
                     <label for="txtEmail">Email</label>
-                    <input type="text" class="form-control" id="txtEmail" placeholder="Enter Email" name="Email" required />
-                    <div class="valid-feedback">
+                    <input type="email" class="form-control" id="txtEmail" placeholder="Enter Email" name="Email" required />
+                    <div class="valid-feedback" id="emailgood">
                         Looks good!
                     </div>
                     <div class="invalid-feedback">
                         Invalid Email.
                     </div>
+                    <small class="email-exist text-danger"></small>
                 </div>
 
                 <div class="form-group col-sm-6">
@@ -93,21 +94,31 @@
     function escapeRegExp(str) {
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
+
+</script>
+
+<script>
+    $("#txtEmail").blur(function () {
+        $.ajax({
+            url: "/api/account?email=" + $("#txtEmail").val(), type: "GET",
+            success:                
+                function (response) {
+                    if (response == "Not Found") {
+                        $(".email-exist").text("");
+                        $(".email-exist").parent(".form-group").find(".valid-feedback").css("color", "green");
+                    }
+                    else {
+                        $(".email-exist").text("Email already registered! Please use other email id.");
+                        $(".email-exist").parent(".form-group").find(".valid-feedback").css("color", "white");
+                    }
+                },
+            error:
+                function () {
+                    $(".email-exist").text("Error!");
+                }
+
+        });
+    });
 </script>
 
 
-
-    @*//$(document).on("submit", "needs-validation", validate);
-    //$("needs-validation input").blur(validate);
-    //function validate(event) {
-    //    if ($(".needs-validation")[0].checkValidity() == false || $(".email-exist").text() != "") {
-    //        event.preventDefault();
-    //    }
-    //    $(".needs-validation")[O].classList.add("was-validated");
-    //}
-
-    //function escapeRegExp(str) {
-    //    return str.replace(/[\-\[\]\/{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-    //}
-
-    //$("a[href='/account/register']").attr("id", "active");*@
