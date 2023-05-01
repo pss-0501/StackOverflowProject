@@ -80,6 +80,7 @@ namespace StackOverflowProject.ServiceLayer
                 cfg.CreateMap<Question, QuestionViewModel>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.CategoryName));
+                //.ForMember(dest => dest.AnswerText, opt => opt.MapFrom(src => src.Answers));
 
                 //cfg.CreateMap<Question, QuestionViewModel>(); //cfg.IgnoreUnmapped();
                 //cfg.CreateMap<User, UserViewModel>(); cfg.IgnoreUnmapped();
@@ -90,7 +91,9 @@ namespace StackOverflowProject.ServiceLayer
                 cfg.IgnoreUnmapped(); });
 
             IMapper mapper = config.CreateMapper();
-            var qvm = mapper.Map<List<QuestionViewModel>>(q);  // List<QuestionViewModel> 
+            //var aqm = mapper.Map<List<AnswerViewModel>>(q);
+            var qvm = mapper.Map<List<QuestionViewModel>>(q);  // List<QuestionViewModel>
+                                                               
             return qvm;
         }
 
@@ -101,16 +104,21 @@ namespace StackOverflowProject.ServiceLayer
             if (q != null)
             {
                 var config = new MapperConfiguration(cfg => { cfg.CreateMap<Question, QuestionViewModel>();
-                    cfg.CreateMap<User, UserViewModel>();
-                    cfg.CreateMap<Category, CategoryViewModel>();
-                    cfg.CreateMap<Answer, AnswerViewModel>();
-                    cfg.CreateMap<Vote, VoteViewModel>();
+
+                    //cfg.CreateMap<Question, QuestionViewModel>()
+                    //.ForMember(dest => dest.C, opt => opt.MapFrom(src => src.User.Name));
+
+                    //cfg.CreateMap<User, UserViewModel>();
+                    //cfg.CreateMap<Category, CategoryViewModel>();
+                    //cfg.CreateMap<Answer, AnswerViewModel>();
+                    ////cfg.CreateMap<Vote, VoteViewModel>();
+
                     cfg.IgnoreUnmapped(); });
 
                 IMapper mapper = config.CreateMapper();
                 qvm = mapper.Map<Question, QuestionViewModel>(q);
 
-                //foreach (var item in qvm.Answers)
+                //foreach (var item in qvm.AnswerText)
                 //{
                 //    item.CurrentUserVoteType = 0;
                 //    VoteViewModel vote = item.Votes.Where(temp => temp.UserID == UserID).FirstOrDefault();

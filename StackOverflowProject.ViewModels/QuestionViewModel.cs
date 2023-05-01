@@ -18,7 +18,6 @@ namespace StackOverflowProject.ViewModels
         public int VotesCount { get; set; }
         public int AnswersCount { get; set; }
         public int ViewsCount { get; set; }
-
         public string UserName { get; set; }
 
         public string CategoryName { get; set; }

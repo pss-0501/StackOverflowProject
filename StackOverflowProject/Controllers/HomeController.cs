@@ -39,7 +39,27 @@ namespace StackOverflowProject.Controllers
 
         public ActionResult Categories()
         {
-            return View();
+            List<CategoryViewModel> categories = this.cs.GetCategories();
+
+            return View(categories);
+        }
+
+        [Route("allquestions")]
+        public ActionResult Questions()
+        {
+            List<QuestionViewModel> questions = this.qs.GetQuestions();
+
+            return View(questions);
+        }
+
+        public ActionResult Search(string str)
+        {
+            List<QuestionViewModel> questions = this.qs.GetQuestions().Where(temp => temp.QuestionName.ToLower().Contains(str.ToLower()) 
+                                                    || temp.CategoryName.ToLower().Contains(str.ToLower())).ToList();
+
+            ViewBag.str = str;
+
+            return View(questions);
         }
     }
 }
